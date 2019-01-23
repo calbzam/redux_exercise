@@ -5,19 +5,15 @@ import {MemberEntity} from '../../model/member'
 interface Props {
   members: Array<MemberEntity>;
   loadMembers: (string) => any;
-}
-
-interface State{
   organization: string;
+  onChange: (e) => void;
 }
 
-export class MemberAreaComponent extends React.Component <Props, State> {
-  constructor (props) {
+
+export class MemberAreaComponent extends React.Component <Props, {}> {
+  constructor(props) {
     super(props);
-}
-
-  state = {organization: 'lemoncode'}
-  
+  }
 
   render(){
     return (
@@ -26,12 +22,13 @@ export class MemberAreaComponent extends React.Component <Props, State> {
           <br/>
           <input
                 type="text"
-                value={this.state.organization}
+                value={this.props.organization}
+                onChange={(e) => this.props.onChange(e.target.value)}
               />
           <input type="submit"
                   value="load"
                   className="btn btn-default"
-                  onClick={() => this.props.loadMembers(this.state.organization)}
+                  onClick={() => this.props.loadMembers(this.props.organization)}
           />
       </div>
       );
