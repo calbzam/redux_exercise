@@ -4,19 +4,37 @@ import {MemberEntity} from '../../model/member'
 
 interface Props {
   members: Array<MemberEntity>;
-  loadMembers: () => any;
+  loadMembers: (string) => any;
 }
 
-export const MemberAreaComponent = (props : Props) => {
-  return (
-  <div>
-      <MemberTableComponent members={props.members}/>
-      <br/>
-      <input type="submit"
-              value="load"
-              className="btn btn-default"
-              onClick={() => props.loadMembers()}
-      />
-  </div>
-  );
+interface State{
+  organization: string;
+}
+
+export class MemberAreaComponent extends React.Component <Props, State> {
+  constructor (props) {
+    super(props);
+}
+
+  state = {organization: 'lemoncode'}
+  
+
+  render(){
+    return (
+      <div>
+          <MemberTableComponent members={this.props.members}/>
+          <br/>
+          <input
+                type="text"
+                value={this.state.organization}
+              />
+          <input type="submit"
+                  value="load"
+                  className="btn btn-default"
+                  onClick={() => this.props.loadMembers(this.state.organization)}
+          />
+      </div>
+      );
+  } 
+  
 }

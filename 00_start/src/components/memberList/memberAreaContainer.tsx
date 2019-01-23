@@ -11,7 +11,7 @@ const mapStateToProps = (state  :State) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadMembers: () => {return dispatch(memberRequest())}
+    loadMembers: (organization) => {return dispatch(memberRequest(organization))}
   };
 }
 
